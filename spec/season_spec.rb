@@ -9,6 +9,10 @@ describe Season do
     end
 
     context 'with teams' do
-        it 'has an empty array of teams when initialized'
+        it 'has an empty array of teams when initialized' do
+        season = Season.new
+
+        expect(season.teams).to match_array([])
     end
+end 
 end
