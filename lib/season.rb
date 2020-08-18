@@ -1,3 +1,4 @@
+require_relative "./environment"
 class Season
     attr_accessor :name
 
@@ -27,8 +28,8 @@ end
 
 #use .each for 11 team names
 #@teams name text = doc.css("font")[0..10].text
-#for below, every odd number before "attr" from 1 (nick and starr) to 21 (anita and arthur) // and need to add "amazingrace.fandom" to beginning of "/wiki/Nick_%26_Starr"
-#@teams link = team_links = [
+
+#team_links = [
 #   doc.css("table a")[1].attr("href"),
 #   doc.css("table a")[3].attr("href"),
 #   doc.css("table a")[5].attr("href"),
@@ -41,6 +42,7 @@ end
 #   doc.css("table a")[19].attr("href"),
 #   doc.css("table a")[21].attr("href")
 # ]
+
 
 # EPISODES
 #@first episode name = doc.css("table")[1].css("tr")[1].children[2].children.children.text

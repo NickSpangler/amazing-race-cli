@@ -1,3 +1,4 @@
+require_relative "./environment"
 class Scraper
 
     def self.scrape_season_page(season_page_url)

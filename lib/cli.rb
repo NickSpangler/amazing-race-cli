@@ -1,5 +1,7 @@
+require_relative "./environment"
 class CLI
-  BASE_PATH = "https://amazingrace.fandom.com/wiki/The_Amazing_Race_"
+  SEASON_PREFIX = "https://amazingrace.fandom.com/wiki/The_Amazing_Race_"
+  PROFILE_PREFIX = "https://amazingrace.fandom.com/"
 
   def run
     puts "Welcome to The Amazing Race!"
@@ -22,7 +24,7 @@ class CLI
     teams.each.with_index(1){|team, index| puts "#{index}. #{team}"}
     episodes.each{|episode| puts episode}
     puts "Select a team or episode to read more about it. Or enter 'new season' to choose a new season."
-    puts "Or enter 'exit' to exit the program."
+    puts "Or enter 'exit' to exit the program. "
 
     input = gets.strip.downcase
     case input
