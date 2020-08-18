@@ -30,10 +30,13 @@ class Scraper
         doc = Nokogiri::HTML(open(team_page_url))
         team_attributes[:about] = "#{doc.css("#mw-content-text > p:nth-child(3)").text.strip}\n\n#{doc.css("#mw-content-text > p:nth-child(4)").text.strip}"
         team_attributes[:profile] = doc.css("#mw-content-text > p")[3..10].text
-        team_attributes[:key] = value
-        team_attributes[:key] = value
-        team_attributes[:key] = value
-
+        team_attributes[:post_race] = puts doc.css("#mw-content-text > ul")[0].text
+        team_attributes[:trivia] = doc.css("#mw-content-text > ul")[1].text
+        team_attributes[:place] = doc.css("#mw-content-text > aside > section:nth-child(4) > div:nth-child(4) > div").text
+        team_attributes[:hometown] = doc.css("#mw-content-text > aside > section:nth-child(3) > div:nth-child(2) > div").text
+        team_attributes[:replationship] = doc.css("#mw-content-text > aside > section:nth-child(3) > div:nth-child(3) > div").text
+        team_attributes[:occupation] = doc.css("#mw-content-text > aside > section:nth-child(3) > div:nth-child(4) > div").text
+        
         team_attributes_hash
     end
 
