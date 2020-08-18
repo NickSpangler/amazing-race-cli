@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require_relative "../lib/environment"
+
+CLI.create_teams
+Team.all.each { |team| puts "#{team.name} - #{team.profile_link}" }

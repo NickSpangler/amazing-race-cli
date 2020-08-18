@@ -21,9 +21,15 @@ class Team
         end
     end
 
-    def self.create_from_scrape(season_page_url)
+    def self.create_teams_from_scrape(season_page_url)
         teams = Scraper.scrape_teams_from_season(season_page_url)
         Team.create_from_array(teams)
     end
-    
+
+    def add_attributes(attributes_hash)
+        attributes_hash.each do |k, v|
+            self.send("#{k}=", v)
+        end
+    end
+
 end

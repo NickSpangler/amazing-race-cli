@@ -26,7 +26,7 @@ class Scraper
     end
 
     def self.scrape_team_page(team_page_url)
-        team_attributes = {}
+        team_attributes_hash = {}
         doc = Nokogiri::HTML(open(team_page_url))
         team_attributes[:key] = value
         team_attributes[:key] = value
@@ -34,8 +34,7 @@ class Scraper
         team_attributes[:key] = value
         team_attributes[:key] = value
 
-        team_attributes
-
+        team_attributes_hash
     end
 
 end

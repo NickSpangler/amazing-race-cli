@@ -1,6 +1,6 @@
 require_relative "./environment"
 class CLI
-  SEASON_PREFIX = "https://amazingrace.fandom.com/wiki/The_Amazing_Race_"
+  SEASON_PREFIX = "https://amazingrace.fandom.com/wiki/The_Amazing_Race_13"
   PROFILE_PREFIX = "https://amazingrace.fandom.com/"
 
   def run
@@ -63,6 +63,10 @@ class CLI
 
   def exit_program
     puts "Thanks for Racing!"
+  end
+
+  def self.create_teams
+    Team.create_teams_from_scrape(SEASON_PREFIX)
   end
 
 end
