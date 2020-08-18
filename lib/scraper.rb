@@ -29,7 +29,7 @@ class Scraper
         team_attributes_hash = {}
         doc = Nokogiri::HTML(open(team_page_url))
         team_attributes[:about] = "#{doc.css("#mw-content-text > p:nth-child(3)").text.strip}\n\n#{doc.css("#mw-content-text > p:nth-child(4)").text.strip}"
-        team_attributes[:key] = value
+        team_attributes[:profile] = doc.css("#mw-content-text > p")[3..10].text
         team_attributes[:key] = value
         team_attributes[:key] = value
         team_attributes[:key] = value
