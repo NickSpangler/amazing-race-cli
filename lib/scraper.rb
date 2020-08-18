@@ -24,4 +24,17 @@ class Scraper
         teams_array
     end
 
+    def self.scrape_team_page(team_page_url)
+        team_attributes = {}
+        doc = Nokogiri::HTML(open(team_page_url))
+        team_attributes[:key] = value
+        team_attributes[:key] = value
+        team_attributes[:key] = value
+        team_attributes[:key] = value
+        team_attributes[:key] = value
+
+        team_attributes
+
+    end
+
 end
