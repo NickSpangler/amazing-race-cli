@@ -1,6 +1,6 @@
 require_relative "./environment"
 class Team
-    attr_accessor :name, :profile_link
+    attr_accessor :name, :profile_link, :about, :profile, :post_race, :trivia, :place, :hometown, :relationship, :occupation, :season
 
     @@all = []
 
@@ -30,6 +30,10 @@ class Team
         attributes_hash.each do |k, v|
             self.send("#{k}=", v)
         end
+    end
+
+    def self.find_by_name(name)
+        self.all.find{|team| team.name == name}
     end
 
 end

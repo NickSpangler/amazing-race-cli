@@ -1,6 +1,6 @@
 require_relative "./environment"
 class CLI
-  SEASON_PREFIX = "https://amazingrace.fandom.com/wiki/The_Amazing_Race_13"
+  SEASON_PREFIX = "https://amazingrace.fandom.com/wiki/The_Amazing_Race_31"
   PROFILE_PREFIX = "https://amazingrace.fandom.com/"
 
   def run
@@ -65,11 +65,11 @@ class CLI
     puts "Thanks for Racing!"
   end
 
-  def create_teams
+  def self.create_teams
     Team.create_teams_from_scrape(SEASON_PREFIX)
   end
 
-  def add_team_info
+  def self.add_team_info
     Team.all.each do |team|
       attributes = Scraper.scrape_team_page(PROFILE_PREFIX + team.profile_link)
       team.add_attributes(attributes)
