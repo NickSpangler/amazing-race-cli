@@ -65,8 +65,15 @@ class CLI
     puts "Thanks for Racing!"
   end
 
-  def self.create_teams
+  def create_teams
     Team.create_teams_from_scrape(SEASON_PREFIX)
+  end
+
+  def add_team_info
+    Team.all.each do |team|
+      attributes = Scraper.scrape_team_page(PROFILE_PREFIX + team.profile_link)
+      team.add_attributes(attributes)
+    end
   end
 
 end
