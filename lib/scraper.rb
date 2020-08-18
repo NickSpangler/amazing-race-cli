@@ -2,8 +2,17 @@ require_relative "./environment"
 class Scraper
 
     def self.scrape_season_page(season_page_url)
-        scraped_season_page = Nokogiri::HTML(open(season_page_url))
+        doc = Nokogiri::HTML(open(season_page_url))
+        season = {}
 
+        season[:title] = doc.css("#PageHeader > div.page-header__main > h1").text
+        season[:about] = doc.css("#mw-content-text > p:nth-child(3)").text
+        season[:distance] = doc.css("#mw-content-text > aside > section:nth-child(3) > div:nth-child(6) > div").text
+        season[:start] = doc.css("#mw-content-text > aside > section:nth-child(3) > div:nth-child(7) > div").text
+        season[:finish] = doc.css("#mw-content-text > aside > section:nth-child(3) > div:nth-child(8) > div").text
+        season[:air_dates] = doc.css("#mw-content-text > aside > section:nth-child(3) > div:nth-child(10) > div").text
+ 
+        season
     end
 
     def self.scrape_teams_from_season(season_page_url)
@@ -24,8 +33,9 @@ class Scraper
     end
 
     def self.scrape_team_page(team_page_url)
-        team_attributes = {}
         doc = Nokogiri::HTML(open(team_page_url))
+        team_attributes = {}
+
         team_attributes[:about] = "#{doc.css("#mw-content-text > p:nth-child(3)").text.strip}\n\n#{doc.css("#mw-content-text > p:nth-child(4)").text.strip}"
         team_attributes[:profile] = doc.css("#mw-content-text > p")[3..10].text
         team_attributes[:post_race] = doc.css("#mw-content-text > ul")[0].text
