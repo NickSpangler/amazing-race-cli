@@ -85,4 +85,11 @@ class CLI
     Episode.create_episodes_from_scrape(SEASON_PREFIX)
   end
 
+  def self.add_episode_info
+    Episode.all.each do |episode|
+      attributes = Scraper.scrape_episode_page(PROFILE_PREFIX + episode.episode_link)
+      episode.add_attributes(attributes)
+    end
+  end
+
 end
