@@ -73,8 +73,8 @@ class Scraper
         episode_attributes[:air_date] = doc.css("div.pi-data-value")[3].text
 
         counter = 0
-        while counter <= doc.css("div.tabbertab").count 
-            episode_attributes["route info #{counter + 1}"] = doc.css("div.tabbertab")[counter]
+        while counter < doc.css("div.tabbertab").count 
+            episode_attributes["route_info_#{counter + 1}"] = doc.css("div.tabbertab")[counter].text
             counter += 1
         end
 
