@@ -81,4 +81,8 @@ class CLI
     Season.new(season_hash)
   end
 
+  def self.create_episodes
+    Episode.create_episodes_from_scrape(SEASON_PREFIX)
+  end
+
 end

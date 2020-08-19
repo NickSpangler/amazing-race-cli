@@ -46,8 +46,24 @@ class Scraper
         team_attributes[:occupation] = doc.css("#mw-content-text > aside > section:nth-child(3) > div:nth-child(4) > div").text
         team_attributes[:season] = doc.css("h2 span")[1].text
         team_attributes[:finish] = doc.css("#mw-content-text > aside > section:nth-child(4) > div:nth-child(4) > div").text[0...-2].to_i
-        
+
         team_attributes
+    end
+
+    def self.scrape_episodes_from_season(season_page_url)
+        doc = Nokogiri::HTML(open(season_page_url))
+        episode_array = []
+        tr_counter = 1
+        while tr_counter <= 11
+            episode = {
+                :numer=> tr_counter,
+                :title=> doc.css("#mw-content-text > table")[1].css("tr")[tr_counter].css("td")[0].text,
+                :episode_link=> doc.css("#mw-content-text > table")[1].css("tr")[tr_counter].css("td")[0].css("a").attr("href")
+            }
+            episode_array << episode
+            tr_counter += 1
+        end
+        episode_array
     end
 
 end
