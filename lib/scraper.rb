@@ -56,7 +56,7 @@ class Scraper
         tr_counter = 1
         while tr_counter <= 11
             episode = {
-                :numer=> tr_counter,
+                :number=> tr_counter,
                 :title=> doc.css("#mw-content-text > table")[1].css("tr")[tr_counter].css("td")[0].text,
                 :episode_link=> doc.css("#mw-content-text > table")[1].css("tr")[tr_counter].css("td")[0].css("a").attr("href")
             }
@@ -64,6 +64,21 @@ class Scraper
             tr_counter += 1
         end
         episode_array
+    end
+
+    def self.scrape_episode_page(episode_page_url)
+        doc = Nokogiri::HTML(open(episode_page_url))
+        episode_attributes = {}
+
+        episode_attributes[:air_date] = doc.css("div.pi-data-value")[3].text
+
+        counter = 0
+        while counter <= doc.css("div.tabbertab").count 
+            episode_attributes["route info #{counter + 1}"] = doc.css("div.tabbertab")[counter]
+            counter += 1
+        end
+
+        episode_attributes
     end
 
 end
