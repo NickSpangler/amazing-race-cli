@@ -1,6 +1,6 @@
 require_relative "./environment"
 class Episode
-    attr_accessor :number, :title, :episode_link, :air_date, :route_info_1, :route_info_2, :route_info_3, :route_info_4, :route_info_5, :route_info_6, :route_info_7, :route_info_8, :route_info_9, :route_info_10
+    attr_accessor :number, :title, :episode_link, :air_date, :route_info_1, :route_info_2, :route_info_3, :route_info_4, :route_info_5, :route_info_6, :route_info_7, :route_info_8, :route_info_9, :route_info_10, :season
 
     @@all = []
 
@@ -34,6 +34,10 @@ class Episode
 
     def self.find_by_episode_number(number)
         self.all.find{|episode| episode.number == number }
+    end
+
+    def self.reset
+        self.all = []
     end
 
 end

@@ -1,6 +1,6 @@
 require_relative "./environment"
 class Team
-    attr_accessor :name, :profile_link, :about, :profile, :post_race, :trivia, :place, :hometown, :relationship, :occupation, :season, :finish
+    attr_accessor :name, :profile_link, :about, :profile, :post_race, :trivia, :place, :hometown, :relationship, :occupation, :season, :finish, :season_number
 
     @@all = []
 
@@ -34,6 +34,10 @@ class Team
 
     def self.find_by_name(name)
         self.all.find{|team| team.name == name}
+    end
+
+    def self.reset
+        self.all = []
     end
 
 end

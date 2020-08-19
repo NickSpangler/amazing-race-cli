@@ -1,12 +1,26 @@
 require_relative "./environment"
 class Season
-    attr_accessor :title, :about, :distance, :start, :finish, :air_dates
+    attr_accessor :title, :about, :distance, :start, :finish, :air_dates, :teams, :episodes
+
+    @@all = []
 
     def initialize(season_hash)
         season_hash.each do |key, value|
             self.send("#{key}=", value)
        end
+       @teams = []
+       @episodes = []
+       @@all << self
     end
+
+    def self.all
+        @@all
+    end
+
+    def self.reset
+        self.all = []
+    end
+
 end 
 
 
