@@ -1,6 +1,6 @@
 require_relative "./environment"
 class Team
-    attr_accessor :name, :profile_link, :about, :profile, :post_race, :trivia, :place, :hometown, :relationship, :occupation, :season
+    attr_accessor :name, :profile_link, :about, :profile, :post_race, :trivia, :place, :hometown, :relationship, :occupation, :season, :finish
 
     @@all = []
 

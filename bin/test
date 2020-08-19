@@ -3,7 +3,10 @@
 require "bundler/setup"
 require_relative "../lib/environment"
 
-CLI.create_teams
-CLI.add_team_info
-Team.all.each { |team| puts team.name; puts team.place }
-binding.pry
+# CLI.create_teams
+# CLI.add_team_info
+# Team.all.each { |team| puts team.name; puts team.place }
+# binding.pry
+
+season = CLI.create_season
+puts season.title
