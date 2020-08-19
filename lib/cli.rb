@@ -60,6 +60,26 @@ class CLI
         
     end
 
+    def display_episode(number)
+        e = Episode.all.find{|episode| episode.number == number}
+        puts ""
+        puts e.title
+        puts ""
+        puts "Air Date: #{e.air_date}"
+        puts ""
+        i = 1
+        while i <= 10
+            if e.send("route_info_#{i}") != nil
+                puts e.send("route_info_#{i}")
+                continue
+                i += 1
+            else
+                i = 11
+            end
+        end
+        puts "You made it to the end!"
+    end
+
     def teams_or_episodes
         puts "For a list of teams to explore, enter 'Teams'."
         puts "For a list of episodes to explore, enter 'Episodes'."
@@ -98,6 +118,7 @@ class CLI
         Episode.all.each.with_index(1){ |episode, i| puts "#{i}. #{episode.title}"}
         puts ""
         puts "Enter an episode number to learn more about it."
+        puts ""
         puts "For a list of teams to explore, enter 'Teams'."
         puts "To return to the season page, enter 'Season'."
         input = gets.strip.downcase
