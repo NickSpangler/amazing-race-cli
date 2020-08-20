@@ -1,6 +1,6 @@
 require_relative "./environment"
 class Episode
-    attr_accessor :number, :title, :episode_link, :air_date, :route_info_1, :route_info_2, :route_info_3, :route_info_4, :route_info_5, :route_info_6, :route_info_7, :route_info_8, :route_info_9, :route_info_10, :season
+    attr_accessor :number, :title, :episode_link, :air_date, :route_info_1, :route_info_2, :route_info_3, :route_info_4, :route_info_5, :route_info_6, :route_info_7, :route_info_8, :route_info_9, :route_info_10, :season, :last_team, :elimination
 
     @@all = []
 

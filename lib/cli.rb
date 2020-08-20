@@ -246,4 +246,24 @@ class CLI
         end
     end
 
+    def racing(team)
+        Episode.all.each do |episode|
+            i = 1
+            while i <= 10
+                if episode.send("route_info_#{i}") != nil
+                    puts episode.send("route_info_#{i}")
+                    puts ""
+                    puts "Press any key to keep racing."
+                    puts ""
+                    continue
+                    i += 1
+                else
+                    i = 11
+                end
+            if episode.elimination == "Elimination Leg" && episode.last_team == team.name
+                break
+            end
+        end
+    end
+
 end
