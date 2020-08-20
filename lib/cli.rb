@@ -34,25 +34,28 @@ class CLI
     end
 
     def display_team(number)
-        t = Team.all.find{ |team| team.finish == number }
+        team = Team.all.find{ |team| team.finish == number }
         puts ""
-        puts t.name
+        puts team.name
         puts ""
-        puts "Relationship: #{t.relationship}"
-        puts "Hometown: #{t.hometown}"
-        puts "Occupation: #{t.occupation}"
-        puts "Finished: #{t.place}"
+        puts "Relationship: #{team.relationship}"
+        puts "Hometown: #{team.hometown}"
+        puts "Occupation: #{team.occupation}"
+        puts "Finished: #{team.place}"
         puts ""
-        puts t.about
+        puts team.about
         puts ""
-        puts "For more info about #{t.name}, enter 'More'."
+        puts "For more info about #{team.name}, enter 'More'."
+        puts "To run #{team.season.title} as #{team.name}, enter 'Race'."
         puts "To choose another team, enter 'Teams'."
         puts "To choose an episode to explore, enter 'Episodes'."
         puts "If you are finished, enter 'Exit'."
         input = gets.strip.downcase
         case input
         when "more"
-            more_info(t)
+            more_info(team)
+        when "race"
+            run_race(team)
         when "teams"
             list_teams
         when "episodes"
@@ -219,7 +222,7 @@ class CLI
         sleep(2)
         puts ""
         puts "GO!"
-        #some method that cycles through all episodes and exits when this team was eliminated
+        racing(team)
         puts ""
         puts "Congratulations on a race well run!"
         sleep(2)
@@ -248,6 +251,7 @@ class CLI
 
     def racing(team)
         Episode.all.each do |episode|
+            if episode.teams.include?(team.name)
             i = 1
             while i <= 10
                 if episode.send("route_info_#{i}") != nil
@@ -260,10 +264,9 @@ class CLI
                 else
                     i = 11
                 end
-            if episode.elimination == "Elimination Leg" && episode.last_team == team.name
-                break
             end
         end
     end
+end
 
 end

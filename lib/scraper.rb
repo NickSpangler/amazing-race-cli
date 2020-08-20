@@ -73,6 +73,13 @@ class Scraper
         episode_attributes[:air_date] = doc.css("div.pi-data-value")[3].text
         episode_attributes[:last_team] = doc.css("table")[0].css("td").last.css("a").text
         episode_attributes[:elimination] = doc.css("span.name").last.text
+        episode_attributes[:teams] = []
+
+        team_counter = 1
+        while team_counter < doc.css("table")[0].css("td a").count
+            episode_attributes[:teams] << doc.css("table")[0].css("td a")[team_counter].text
+            team_counter += 2
+        end
 
         counter = 0
         while counter < doc.css("div.tabbertab").count 
