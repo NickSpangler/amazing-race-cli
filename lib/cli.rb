@@ -209,7 +209,41 @@ class CLI
 
     def run_race(team)
         puts ""
-        puts "Congratulations "
+        puts "Congratulations on being selected to run #{Season.all[0].title}, #{team.name}!"
+        sleep(3)
+        puts ""
+        puts "You're standing at the starting line, at #{Season.all[0].start}."
+        sleep(3)
+        puts ""
+        puts "The world is waiting for you..."
+        sleep(2)
+        puts ""
+        puts "GO!"
+        #some method that cycles through all episodes and exits when this team was eliminated
+        puts ""
+        puts "Congratulations on a race well run!"
+        sleep(2)
+        puts ""
+        puts "You finished #{team.place}! You should be proud."
+        sleep(3)
+        puts ""
+        puts "We hope you race again soon!"
+        sleep (2)
+        puts ""
+        puts "For a list of teams, enter 'Teams'."
+        puts "For a list of episodes, enter 'Episodes'."
+        puts "If you are finished, enter 'Exit'."
+        input = gets.strip.downcase
+        case input
+        when "teams"
+            list_teams
+        when "episodes"
+            list_episodes
+        when "exit"
+            exit_program
+        else
+            invalid_input
+        end
     end
 
 end
