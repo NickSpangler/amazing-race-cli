@@ -4,9 +4,10 @@ require 'io/console'
 class CLI
     
     def run
-        puts "Welcome to The Amazing Race!"
-        puts "The teams are converging on the starting line."
-        puts "You'd better hurry if you want to join them!"
+        puts ""
+        puts "Welcome to The Amazing Race emulator!".red
+        puts "Teams are converging on the starting line.".yellow
+        puts "You'd better hurry if you want to join them!".red
         CBS.big_bang
         puts "Are you ready to explore Season 13? Hit 'return' to learn more!"
         continue
@@ -21,14 +22,14 @@ class CLI
     def display_season
         puts ""
         s = Season.all[0]
-        puts s.title
+        puts s.title.yellow.bold
         puts ""
-        puts s.about
+        puts s.about.fit.red
         puts ""
-        puts "Distance traveled: #{s.distance}"
-        puts "Starting line: #{s.start}"
-        puts "Finish line: #{s.finish}"
-        puts "Air dates: #{s.air_dates}"
+        puts "#{"Distance traveled:".yellow} #{s.distance.red}"
+        puts "#{"Starting line:".yellow} #{s.start.red}"
+        puts "#{"Finish line:".yellow} #{s.finish.red}"
+        puts "#{"Air dates:".yellow} #{s.air_dates.red}"
         puts ""
         teams_or_episodes
     end
@@ -43,7 +44,7 @@ class CLI
         puts "Occupation: #{team.occupation}"
         puts "Finished: #{team.place}"
         puts ""
-        puts team.about
+        puts team.about.fit
         puts ""
         puts "For more info about #{team.name}, enter 'More'."
         puts "To run #{team.season.title} as #{team.name}, enter 'Race'."
@@ -164,11 +165,11 @@ class CLI
 
     def more_info(team)
         puts ""
-        puts "Profile: #{team.profile}"
+        puts "Profile: #{team.profile}".fit
         puts ""
-        puts "Post Race: #{team.post_race}"
+        puts "Post Race: #{team.post_race}".fit
         puts ""
-        puts "Trivia: #{team.trivia}"
+        puts "Trivia: #{team.trivia}".fit
         puts ""
         puts "To run #{team.season.title} as #{team.name}, enter 'Race'."
         puts "To choose another team, enter 'Teams'."
@@ -262,7 +263,7 @@ class CLI
             i = 1
             while i <= 10
                 if episode.send("route_info_#{i}") != nil
-                    puts episode.send("route_info_#{i}")
+                    puts episode.send("route_info_#{i}").gsub("#{team.name}", "You")
                     puts ""
                     puts "Press any key to keep racing."
                     puts ""
