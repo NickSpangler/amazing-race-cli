@@ -37,20 +37,20 @@ class CLI
     def display_team(number)
         team = Team.all.find{ |team| team.finish == number }
         puts ""
-        puts team.name
+        puts team.name.yellow.bold
         puts ""
-        puts "Relationship: #{team.relationship}"
-        puts "Hometown: #{team.hometown}"
-        puts "Occupation: #{team.occupation}"
-        puts "Finished: #{team.place}"
+        puts "#{"Relationship:".yellow} #{team.relationship.red}"
+        puts "#{"Hometown:".yellow} #{team.hometown.red}"
+        puts "#{"Occupation:".yellow} #{team.occupation.red}"
+        puts "#{"Finished:".yellow} #{team.place.red}"
         puts ""
-        puts team.about.fit
+        puts team.about.red.fit
         puts ""
-        puts "For more info about #{team.name}, enter 'More'."
-        puts "To run #{team.season.title} as #{team.name}, enter 'Race'."
-        puts "To choose another team, enter 'Teams'."
-        puts "To choose an episode to explore, enter 'Episodes'."
-        puts "If you are finished, enter 'Exit'."
+        puts "For more info about #{team.name}, enter '#{"More".yellow}'."
+        puts "To run #{team.season.title} as #{team.name}, enter '#{"Race".yellow}'."
+        puts "To choose another team, enter '#{"Teams".yellow}'."
+        puts "To choose an episode to explore, enter '#{"Episodes".yellow}'."
+        puts "If you are finished, enter '#{"Exit".red}'."
         input = gets.strip.downcase
         case input
         when "more"
@@ -106,9 +106,9 @@ class CLI
     end
 
     def teams_or_episodes
-        puts "For a list of teams to explore, enter 'Teams'."
-        puts "For a list of episodes to explore, enter 'Episodes'."
-        puts "If you are finished, enter 'Exit'."
+        puts "For a list of teams to explore, enter '#{"Teams".yellow}'."
+        puts "For a list of episodes to explore, enter '#{"Episodes".yellow}'."
+        puts "If you are finished, enter '#{"Exit".red}'."
         input = gets.strip.downcase
         case input
         when "teams"
@@ -124,11 +124,14 @@ class CLI
 
     def list_teams
         puts ""
-        Team.all.each.with_index(1){ |team, i| puts "#{i}. #{team.name}"}
+        puts "#{Season.all[0].title} - Teams".red.bold
         puts ""
-        puts "Enter a team number to learn more about them."
-        puts "For a list of episodes to explore, enter 'Episodes'."
-        puts "To return to the season page, enter 'Season'."
+        Team.all.each.with_index(1){ |team, i| puts "#{"#{i}.".red} #{team.name.yellow}"}
+        puts ""
+        puts "Enter a #{"team number".yellow} to learn more about them."
+        puts "For a list of episodes to explore, enter '#{"Episodes".yellow}'."
+        puts "To return to the season page, enter '#{"Season".yellow}'."
+        puts "If you are finished, enter '#{"Exit".red}'."
         input = gets.strip.downcase
         if input.to_i.between?(1, 11)
             display_team(input.to_i)
@@ -136,19 +139,23 @@ class CLI
             list_episodes
         elsif input == "season"
             display_season
+        elsif input == "exit"
+            exit_program
         else
-            list_teams
+            invalid_input
         end
     end
 
     def list_episodes
         puts ""
-        Episode.all.each.with_index(1){ |episode, i| puts "#{i}. #{episode.title}"}
+        puts "#{Season.all[0].title} - Episodes".red.bold
         puts ""
-        puts "Enter an episode number to learn more about it."
-        puts "For a list of teams to explore, enter 'Teams'."
-        puts "To return to the season page, enter 'Season'."
-        puts "If you are finished, enter 'Exit'."
+        Episode.all.each.with_index(1){ |episode, i| puts "#{"#{i}.".red} #{episode.title.strip.yellow}"}
+        puts ""
+        puts "Enter an #{"episode number".yellow} to learn more about it."
+        puts "For a list of teams to explore, enter '#{"Teams".yellow}'."
+        puts "To return to the season page, enter '#{"Season".yellow}'."
+        puts "If you are finished, enter '#{"Exit".red}'."
         input = gets.strip.downcase
         if input.to_i.between?(1, 11)
             display_episode(input.to_i)
@@ -165,16 +172,18 @@ class CLI
 
     def more_info(team)
         puts ""
-        puts "Profile: #{team.profile}".fit
+        puts team.name.yellow.bold
         puts ""
-        puts "Post Race: #{team.post_race}".fit
+        puts "#{"Profile:".yellow} #{team.profile.red}".fit
         puts ""
-        puts "Trivia: #{team.trivia}".fit
+        puts "#{"Post-Race:".yellow} #{team.post_race.red}".fit
         puts ""
-        puts "To run #{team.season.title} as #{team.name}, enter 'Race'."
-        puts "To choose another team, enter 'Teams'."
-        puts "To choose an episode to explore, enter 'Episodes'."
-        puts "If you are finished, enter 'Exit'."
+        puts "#{"Trivia:".yellow} #{team.trivia.red}".fit
+        puts ""
+        puts "To run #{team.season.title} as #{team.name}, enter '#{"Race".yellow}'."
+        puts "To choose another team, enter '#{"Teams".yellow}'."
+        puts "To choose an episode to explore, enter '#{"Episodes".yellow}'."
+        puts "If you are finished, enter '#{"Exit".red}'."
         input = gets.strip.downcase
         case input
         when "race"
@@ -198,9 +207,9 @@ class CLI
 
     def invalid_input
         puts "I'm sorry, I'm not sure what you mean."
-        puts "For a list of teams, enter 'Teams'."
-        puts "For a list of episodes, enter 'Episodes'."
-        puts "If you are finished, enter 'Exit'."
+        puts "For a list of teams, enter '#{"Teams".yellow}'."
+        puts "For a list of episodes, enter '#{"Episodes".yellow}'."
+        puts "If you are finished, enter '#{"Exit".red}'."
         input = gets.strip.downcase
         case input
         when "teams"
