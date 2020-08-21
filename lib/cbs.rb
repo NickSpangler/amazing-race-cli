@@ -1,10 +1,10 @@
 require_relative "./environment"
 class CBS
-  SEASON_PREFIX = "https://amazingrace.fandom.com/wiki/The_Amazing_Race_13"
+  SEASON_PREFIX = "https://amazingrace.fandom.com/wiki/The_Amazing_Race_"
   PROFILE_PREFIX = "https://amazingrace.fandom.com/"
 
-  def self.create_teams
-    Team.create_teams_from_scrape(SEASON_PREFIX)
+  def self.create_teams(input)
+    Team.create_teams_from_scrape(SEASON_PREFIX + input)
   end
 
   def self.add_team_info
@@ -14,13 +14,13 @@ class CBS
     end
   end
 
-  def self.create_season
-    season_hash = Scraper.scrape_season_page(SEASON_PREFIX)
+  def self.create_season(input)
+    season_hash = Scraper.scrape_season_page(SEASON_PREFIX + input)
     Season.new(season_hash)
   end
 
-  def self.create_episodes
-    Episode.create_episodes_from_scrape(SEASON_PREFIX)
+  def self.create_episodes(input)
+    Episode.create_episodes_from_scrape(SEASON_PREFIX + input)
   end
 
   def self.add_episode_info
@@ -41,11 +41,11 @@ class CBS
     end
   end
 
-  def self.big_bang
-    create_season
-    create_teams
+  def self.big_bang(input)
+    create_season(input)
+    create_teams(input)
     add_team_info
-    create_episodes
+    create_episodes(input)
     add_episode_info
     associate
   end

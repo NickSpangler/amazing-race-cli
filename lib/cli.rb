@@ -4,12 +4,21 @@ require 'io/console'
 class CLI
     
     def run
+        CBS.reset_program
         puts ""
-        puts "Welcome to The Amazing Race emulator!".red
-        puts "Teams are converging on the starting line.".yellow
+        puts "Welcome to The Amazing Race CLI emulator!".red
+        puts "Teams are heading to the starting line.".yellow
         puts "You'd better hurry if you want to join them!".red
-        CBS.big_bang
-        puts "Are you ready to explore #{Season.all[0].title}? Hit 'return' to learn more!"
+        puts ""
+        puts "What season would you like to explore? You can enter 1 - 31."
+        input = gets.strip
+        puts ""
+        puts "Pack your bag, it's race time!".yellow
+        puts "Flights are being scheduled...".red
+        puts "Producers are hiding clues...".yellow
+        CBS.big_bang(input)
+        puts ""
+        puts "#{Season.all[0].title.red} is about to start! Hit '#{"return".yellow}' when your bag is packed!"
         continue
         display_season
     end
@@ -124,7 +133,7 @@ class CLI
         puts ""
         puts "Enter a #{"team number".yellow} to learn more about them."
         puts "For a list of episodes to explore, enter '#{"Episodes".yellow}'."
-        puts "To return to the season page, enter '#{"Season".yellow}'."
+        puts "To pick a new season, enter '#{"Season".yellow}'."
         puts "If you are finished, enter '#{"Exit".red}'."
         input = gets.strip.downcase
         if input.to_i.between?(1, 11)
@@ -132,7 +141,7 @@ class CLI
         elsif input == "episodes"
             list_episodes
         elsif input == "season"
-            display_season
+            run
         elsif input == "exit"
             exit_program
         else
@@ -148,7 +157,7 @@ class CLI
         puts ""
         puts "Enter an #{"episode number".yellow} to learn more about it."
         puts "For a list of teams to explore, enter '#{"Teams".yellow}'."
-        puts "To return to the season page, enter '#{"Season".yellow}'."
+        puts "To pick a new season, enter '#{"Season".yellow}'."
         puts "If you are finished, enter '#{"Exit".red}'."
         input = gets.strip.downcase
         if input.to_i.between?(1, 11)
@@ -156,7 +165,7 @@ class CLI
         elsif input == "teams"
             list_teams
         elsif input == "season"
-            display_season
+            run
         elsif input == "exit"
             exit_program
         else
