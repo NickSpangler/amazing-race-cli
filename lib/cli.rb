@@ -44,7 +44,7 @@ class CLI
         puts "#{"Occupation:".yellow} #{team.occupation.red}"
         puts "#{"Finished:".yellow} #{team.place.red}"
         puts ""
-        puts team.about.red.fit
+        puts team.about.strip.red.fit
         puts ""
         puts "For more info about #{team.name}, enter '#{"More".yellow}'."
         puts "To run #{team.season.title} as #{team.name}, enter '#{"Race".yellow}'."
@@ -72,20 +72,20 @@ class CLI
     def display_episode(number)
         e = Episode.all.find{|episode| episode.number == number}
         puts ""
-        puts "Episode #{number} - #{e.title}"
+        puts "Episode #{number} - #{e.title}".yellow.bold
         puts ""
-        puts "Air Date: #{e.air_date}"
+        puts "#{"Air Date:".yellow} #{e.air_date.red}"
         puts ""
         e.route_info.each do |info|
-            puts info
+            puts info.red.fit
             puts ""
             puts "Press any key to keep racing."
             puts ""
             continue
         end
-        puts "To choose another episode, enter 'Episodes'."
-        puts "To see a list of teams, enter 'Teams'."
-        puts "If you are finished, enter 'Exit'."
+        puts "To choose another episode, enter '#{"Episodes".yellow}'."
+        puts "To see a list of teams, enter '#{"Teams".yellow}'."
+        puts "If you are finished, enter '#{"Exit".red}'."
         input = gets.strip.downcase
         case input
         when "teams"
@@ -219,10 +219,10 @@ class CLI
 
     def run_race(team)
         puts ""
-        puts "Congratulations on being selected to run #{Season.all[0].title}, #{team.name}!"
+        puts "Congratulations on being selected to run #{Season.all[0].title.red}, #{team.name}!"
         sleep(3)
         puts ""
-        puts "You're standing at the starting line, at #{Season.all[0].start}."
+        puts "You're standing at the starting line, #{Season.all[0].start.yellow}."
         sleep(3)
         puts ""
         puts "The world is waiting for you..."
@@ -233,18 +233,18 @@ class CLI
         puts ""
         racing(team)
         puts ""
-        puts "Congratulations on a race well run!"
+        puts "Congratulations on a race well run!".yellow.bold
         sleep(2)
         puts ""
-        puts "You finished #{team.place}! You should be proud."
+        puts "You finished #{team.place.yellow}! You should be proud."
         sleep(3)
         puts ""
         puts "We hope you race again soon!"
         sleep (2)
         puts ""
-        puts "For a list of teams, enter 'Teams'."
-        puts "For a list of episodes, enter 'Episodes'."
-        puts "If you are finished, enter 'Exit'."
+        puts "For a list of teams, enter '#{"Teams".yellow}'."
+        puts "For a list of episodes, enter '#{"Episodes".yellow}'."
+        puts "If you are finished, enter '#{"Exit".red}'."
         input = gets.strip.downcase
         case input
         when "teams"
@@ -261,10 +261,10 @@ class CLI
     def racing(team)
         Episode.all.each do |episode|
             if episode.teams.include?(team.name)
-                puts "Episode #{episode.number} - #{episode.title}"
+                puts "Episode #{episode.number} - #{episode.title}".yellow.bold
                 puts ""
                 episode.route_info.each do |info|
-                    puts info
+                    puts info.red.fit.gsub("#{team.name}", "You")
                     puts ""
                     puts "Press any key to keep racing."
                     puts ""

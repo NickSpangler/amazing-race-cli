@@ -37,9 +37,9 @@ class Scraper
         team_attributes = {}
 
         team_attributes[:about] = "#{doc.css("#mw-content-text > p:nth-child(3)").text.strip}\n\n#{doc.css("#mw-content-text > p:nth-child(4)").text.strip}"
-        team_attributes[:profile] = doc.css("#mw-content-text > p")[3..10].text
-        team_attributes[:post_race] = doc.css("#mw-content-text > ul")[0].text
-        team_attributes[:trivia] = doc.css("#mw-content-text > ul")[1].text
+        team_attributes[:profile] = doc.css("#mw-content-text > p")[3..10].text.strip
+        team_attributes[:post_race] = doc.css("#mw-content-text > ul")[0].text if doc.css("#mw-content-text > ul")[0]
+        team_attributes[:trivia] = doc.css("#mw-content-text > ul")[1].text if doc.css("#mw-content-text > ul")[1]
         team_attributes[:place] = doc.css("#mw-content-text > aside > section:nth-child(4) > div:nth-child(4) > div").text
         team_attributes[:hometown] = doc.css("#mw-content-text > aside > section:nth-child(3) > div:nth-child(2) > div").text
         team_attributes[:relationship] = doc.css("#mw-content-text > aside > section:nth-child(3) > div:nth-child(3) > div").text
@@ -76,15 +76,15 @@ class Scraper
         episode_attributes[:route_info] = []
         episode_attributes[:teams] = []
 
-        team_counter = 1
-        while team_counter < doc.css("table")[0].css("td a").count
-            episode_attributes[:teams] << doc.css("table")[0].css("td a")[team_counter].text
-            team_counter += 2
+        doc.css("table")[0].css("td a").find_all do |element|
+            if element.text != nil && element.text != "" && element.text != "►"
+                episode_attributes[:teams] << element.text
+            end
         end
 
         counter = 0
         while counter < doc.css("div.tabbertab").count
-            episode_attributes[:route_info] << doc.css("div.tabbertab")[counter].text
+            episode_attributes[:route_info] << doc.css("div.tabbertab")[counter].text.strip
             counter += 1
         end
 
