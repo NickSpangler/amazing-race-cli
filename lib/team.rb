@@ -37,7 +37,7 @@ class Team
     end
 
     def self.reset
-        self.all = []
+        @@all = []
     end
 
 end

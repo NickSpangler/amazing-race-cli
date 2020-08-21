@@ -18,7 +18,7 @@ class Season
     end
 
     def self.reset
-        self.all = []
+        @@all = []
     end
 
 end 

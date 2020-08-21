@@ -9,7 +9,7 @@ class CLI
         puts "Teams are converging on the starting line.".yellow
         puts "You'd better hurry if you want to join them!".red
         CBS.big_bang
-        puts "Are you ready to explore Season 13? Hit 'return' to learn more!"
+        puts "Are you ready to explore #{Season.all[0].title}? Hit 'return' to learn more!"
         continue
         display_season
     end
@@ -76,18 +76,12 @@ class CLI
         puts ""
         puts "Air Date: #{e.air_date}"
         puts ""
-        i = 1
-        while i <= 10
-            if e.send("route_info_#{i}") != nil
-                puts e.send("route_info_#{i}")
-                puts ""
-                puts "Press any key to keep racing."
-                puts ""
-                continue
-                i += 1
-            else
-                i = 11
-            end
+        e.route_info.each do |info|
+            puts info
+            puts ""
+            puts "Press any key to keep racing."
+            puts ""
+            continue
         end
         puts "To choose another episode, enter 'Episodes'."
         puts "To see a list of teams, enter 'Teams'."
@@ -269,21 +263,15 @@ class CLI
             if episode.teams.include?(team.name)
                 puts "Episode #{episode.number} - #{episode.title}"
                 puts ""
-            i = 1
-            while i <= 10
-                if episode.send("route_info_#{i}") != nil
-                    puts episode.send("route_info_#{i}").gsub("#{team.name}", "You")
+                episode.route_info.each do |info|
+                    puts info
                     puts ""
                     puts "Press any key to keep racing."
                     puts ""
                     continue
-                    i += 1
-                else
-                    i = 11
                 end
             end
         end
     end
-end
 
 end
