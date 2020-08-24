@@ -112,7 +112,7 @@ class CLI
         puts "Enter a #{"team number".yellow} to learn more about them."
         puts "Or enter '#{"Menu".yellow}' or '#{"Exit".red}'."
         input = gets.strip.downcase
-        if input.to_i.between?(1, 11)
+        if input.to_i > 0 && input.to_i <= Team.all.count
             display_team(input.to_i)
         elsif input == "exit"
             exit_program
@@ -130,7 +130,7 @@ class CLI
         puts "Enter an #{"episode number".yellow} to learn more about it."
         puts "Or enter '#{"Menu".yellow}' or '#{"Exit".red}'."
         input = gets.strip.downcase
-        if input.to_i.between?(1, 11)
+        if input.to_i > 0 && input.to_i <= Episode.all.count
             display_episode(input.to_i)
         elsif input == "exit"
             exit_program

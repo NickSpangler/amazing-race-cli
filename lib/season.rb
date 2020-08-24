@@ -1,24 +1,20 @@
 require_relative "./environment"
 class Season
+    extend Behavior::ClassMethods
+    include Behavior::InstanceMethods
+    
     attr_accessor :title, :about, :distance, :start, :finish, :air_dates, :teams, :episodes
 
     @@all = []
 
-    def initialize(season_hash)
-        season_hash.each do |key, value|
-            self.send("#{key}=", value)
-       end
+    def initialize(hash)
+        super
        @teams = []
        @episodes = []
-       @@all << self
     end
 
     def self.all
         @@all
-    end
-
-    def self.reset
-        @@all = []
     end
 
 end 

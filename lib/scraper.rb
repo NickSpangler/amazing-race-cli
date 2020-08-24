@@ -18,16 +18,16 @@ class Scraper
     def self.scrape_teams_from_season(season_page_url)
         doc = Nokogiri::HTML(open(season_page_url))
         teams_array = []
-        name_counter = 0
-        link_counter = 1
-        while name_counter <= 10 && link_counter <= 21
-            team = {
-                :name=> doc.css("font")[name_counter].text,
-                :profile_link=> doc.css("table a")[link_counter].attr("href")
-            }
-            teams_array << team
-            name_counter += 1
-            link_counter += 2
+        doc.css("table")[0].css("tr td a").each do |team|
+            unless team.text =~ /The Amazing Race/ || team.text =~ /\d+/
+                if team.text != "" && team.text != nil
+                    team = {
+                        :name=> team.text,
+                        :profile_link=> team.attr("href")
+                        }
+                    teams_array << team
+                end
+            end
         end
         teams_array
     end
@@ -54,15 +54,17 @@ class Scraper
         doc = Nokogiri::HTML(open(season_page_url))
         episode_array = []
         tr_counter = 1
-        while tr_counter <= 11
-            episode = {
-                :number=> tr_counter,
-                :title=> doc.css("#mw-content-text > table")[1].css("tr")[tr_counter].css("td")[0].text,
-                :episode_link=> doc.css("#mw-content-text > table")[1].css("tr")[tr_counter].css("td")[0].css("a").attr("href")
-            }
-            episode_array << episode
-            tr_counter += 1
-        end
+            doc.css("table.wikitable")[0].css("tr td a").each do |link|
+                unless link.text =~ /^\[\d*\]/
+                episode = {
+                    :number=> tr_counter,
+                    :title=> link.text,
+                    :episode_link=> link.attr("href")
+                }
+                tr_counter += 1
+                episode_array << episode
+                end
+            end
         episode_array
     end
 
@@ -70,7 +72,7 @@ class Scraper
         doc = Nokogiri::HTML(open(episode_page_url))
         episode_attributes = {}
 
-        episode_attributes[:air_date] = doc.css("div.pi-data-value")[3].text
+        episode_attributes[:air_date] = doc.css("div.pi-data-value")[3].text if doc.css("div.pi-data-value")[3] != nil
         episode_attributes[:last_team] = doc.css("table")[0].css("td").last.css("a").text
         episode_attributes[:elimination] = doc.css("span.name").last.text
         episode_attributes[:route_info] = []
