@@ -37,7 +37,7 @@ class CLI
         s = Season.all[0]
         puts s.title.yellow.bold
         puts ""
-        puts s.about.fit.red
+        puts s.about.fit.red.gsub(/\[\d+\]/, "")
         puts ""
         puts "#{"Distance traveled:".yellow} #{s.distance.red}"
         puts "#{"Starting line:".yellow} #{s.start.red}"
@@ -143,11 +143,11 @@ class CLI
         puts ""
         puts team.name.yellow.bold
         puts ""
-        puts "#{"Profile:".yellow} #{team.profile.red}".fit
+        puts "#{"Profile:".yellow} #{team.profile.red}".gsub(/\[\d+\]/, "").fit
         puts ""
-        puts "#{"Post-Race:".yellow} #{team.post_race.red}".fit
+        puts "#{"Post-Race:".yellow} #{team.post_race.red}".gsub(/\[\d+\]/, "").fit
         puts ""
-        puts "#{"Trivia:".yellow} #{team.trivia.red}".fit
+        puts "#{"Trivia:".yellow} #{team.trivia.red}".gsub(/\[\d+\]/, "").fit
         puts ""
         puts "To run #{team.season.title} as #{team.name}, enter '#{"Race".yellow}'."
         puts "To choose another team, enter '#{"Teams".yellow}'."
@@ -205,7 +205,7 @@ class CLI
                 puts "Episode #{episode.number} - #{episode.title}".yellow.bold
                 puts ""
                 episode.route_info.each do |info|
-                    puts info.red.fit.gsub("#{team.name}", "You")
+                    puts info.red.fit.gsub("#{team.name}", "You").gsub(/\[\d+\]/, "")
                     puts ""
                     puts "Press any key to keep racing."
                     puts ""
