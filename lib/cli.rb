@@ -52,9 +52,9 @@ class CLI
         puts ""
         puts team.name.yellow.bold
         puts ""
-        puts "#{"Relationship:".yellow} #{team.relationship.red}"
-        puts "#{"Hometown:".yellow} #{team.hometown.red}"
-        puts "#{"Occupation:".yellow} #{team.occupation.red}"
+        puts "#{"Relationship:".yellow} #{team.relationship.red}" unless team.relationship == nil
+        puts "#{"Hometown:".yellow} #{team.hometown.red}" unless team.hometown == nil
+        puts "#{"Occupation:".yellow} #{team.occupation.red}" unless team.occupation == nil
         puts "#{"Finished:".yellow} #{team.place.red}"
         puts ""
         puts team.about.strip.red.fit
