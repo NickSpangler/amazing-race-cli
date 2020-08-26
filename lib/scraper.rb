@@ -50,9 +50,6 @@ class Scraper
                 team_attributes[:occupation] = item.css("div.pi-data-value").text
             end
         end
-        # team_attributes[:hometown] = doc.css("#mw-content-text > aside > section:nth-child(3) > div:nth-child(2) > div").text
-        # team_attributes[:relationship] = doc.css("#mw-content-text > aside > section:nth-child(3) > div:nth-child(3) > div").text
-        # team_attributes[:occupation] = doc.css("#mw-content-text > aside > section:nth-child(3) > div:nth-child(4) > div").text
         team_attributes[:season_number] = doc.css("h2 span")[1].text
         team_attributes[:finish] = doc.css("#mw-content-text > aside > section:nth-child(4) > div:nth-child(4) > div").text[0...-2].to_i
 

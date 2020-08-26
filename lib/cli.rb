@@ -165,12 +165,6 @@ class CLI
         end
     end
 
-    def exit_program
-        puts ""
-        puts "Thank you for racing!".red.bold
-        puts ""
-    end
-
     def run_race(team)
         puts ""
         puts "Congratulations on being selected to run #{Season.all[0].title.red}, #{team.name}!"
@@ -233,6 +227,12 @@ class CLI
         else
             menu
         end
+    end
+
+    def exit_program
+        puts ""
+        puts "Thank you for racing!".red.bold
+        puts ""
     end
 
 end

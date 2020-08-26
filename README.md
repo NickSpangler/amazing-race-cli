@@ -1,8 +1,6 @@
 # Amazingracecli
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/amazingracecli`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to The Amazing Race CLI emulator, written by Amazing Race 13 winner, Nick Spangler. With this gem, using a command line interface, you can explore all 31 seasons of The Amazing Race, including season summaries, detailed team pages, and detailed episodes descriptions - or even run the race as your favoirte team! The world is waiting for you... GO!
 
 ## Installation
 
@@ -22,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To launch the program, in your terminal of choice navigate to your new 'amazingracecli' directory. Within that parent folder you'll find a bin directory, and within the bin directory is your executable file titled 'run-race'. From within the bin directory, execute './bin/run-race' in your console, and the program will launch. Enjoy!
 
 ## Development
 
@@ -32,7 +30,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/<github username>/amazingracecli.
+Bug reports and pull requests are welcome on GitHub at https://github.com/NickSpangler/amazing-race-cli.
 
 
 ## License
