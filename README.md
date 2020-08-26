@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-To launch the program, in your terminal of choice navigate to your new 'amazingracecli' directory. Within that parent folder you'll find a bin directory, and within the bin directory is your executable file titled 'run-race'. From within the bin directory, execute './bin/run-race' in your console, and the program will launch. Enjoy!
+To launch the program, in your terminal of choice navigate to your new 'amazingracecli' directory. Within that parent folder you'll find a bin directory, and within the bin directory is your executable file titled 'run-race'. From within the 'amazingracecli' directory, execute './bin/run-race' in your console, and the program will launch. Enjoy!
 
 ## Development
 
